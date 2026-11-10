@@ -1,0 +1,178 @@
+.contenedor {
+  background: var(--fondo-barra-navegacion);
+  color: var(--color-texto-pagina);
+  border-bottom: 1px solid var(--borde-barra-navegacion);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 60px;
+  padding: 10px 30px;
+}
+
+.negocio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.iconoTienda {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--color-acento1);
+  color: var(--color-acento);
+  font-size: 22px;
+}
+
+.nombre {
+  font-size: 20px;
+  font-weight: 700;
+}
+.seccion {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  padding-left: 24px;
+  border-left: 1px solid var(--borde-barra-navegacion);
+  color: var(--color-texto);
+  font-size: 24px;
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+}
+
+.selectorCajero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  color: var(--color-texto-pagina);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.selectorCajero > i {
+  display: flex;
+  font-size: 20px;
+  color: var(--color-texto-secundario);
+}
+
+.selectorCajero select:hover {
+  border-color: var(--color-acento);
+}
+
+.selectorCajero select {
+  appearance: none;
+  min-height: 42px;
+  padding: 0 34px 0 12px;
+  border: 1px solid var(--borde-barra-navegacion);
+  border-radius: 12px;
+  background: var(--fondo-boton-tema);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.selectorCajero select option {
+  background: var(--fondo-barra-navegacion);
+  color: var(--color-texto-pagina);
+}
+
+.selectorCajero select:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+}
+
+.selectorCajero .flechaCajero {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+}
+
+.separadorTema {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-left: 1px solid var(--borde-barra-navegacion);
+}
+
+.botonTema {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--borde-barra-navegacion);
+  border-radius: 12px;
+  background: var(--fondo-boton-tema);
+  color: var(--color-boton-tema);
+  font-size: 20px;
+  cursor: pointer;
+  transition:
+    transform 0.4s ease,
+    background-color 0.3s ease;
+}
+
+.iconoTienda i,
+.botonTema i {
+  display: flex;
+}
+.botonTema:hover {
+  background: var(--color-acento1);
+  transform: scale(1.05);
+}
+.botonTema:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px;
+  }
+  .seccion {
+    order: 3;
+    flex-basis: 100%;
+    border: 0;
+    padding: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .acciones {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .separadorTema {
+    padding-left: 10px;
+  }
+  .selectorCajero {
+    gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contenedor,
+  .botonTema {
+    transition: none;
+  }
+  .botonTema:hover {
+    transform: none;
+  }
+}
