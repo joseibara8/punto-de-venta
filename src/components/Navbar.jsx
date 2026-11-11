@@ -55,7 +55,7 @@ export default function Navbar() {
               title={etiquetaTema}
             >
               <i
-                className={`fi fi-rr-${tema === "light" ? "moon" : "sun"}`}
+                className={`fi fi-sr-${tema === "light" ? "moon" : "sun"}`}
                 aria-hidden="true"
               />
             </button>
