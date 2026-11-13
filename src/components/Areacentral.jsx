@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import estilos from "./areacentral.module.css";
 import Producto_card from "@/components/Producto_card";
 
-export default function AreaCentral() {
+export default function AreaCentral({ agregarProducto }) {
   const [valorinput, setValorinput] = useState("");
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -59,11 +59,19 @@ export default function AreaCentral() {
               <i className="fi fi-rr-search" />
             </span>
             <h3>{"No se encontraron productos llamados: " + textobuscado}</h3>
-            <p>{textobuscado ? "Intenta buscar con otro producto." : "Todavía no hay productos disponibles."}</p>
+            <p>
+              {textobuscado
+                ? "Intenta buscar con otro producto."
+                : "Todavía no hay productos disponibles."}
+            </p>
           </div>
         ) : (
           productosFiltrados.map((producto) => (
-            <Producto_card key={producto.id} producto={producto}/>
+            <Producto_card
+              key={producto.id}
+              producto={producto}
+              agregarProducto={agregarProducto}
+            />
           ))
         )}
       </div>
