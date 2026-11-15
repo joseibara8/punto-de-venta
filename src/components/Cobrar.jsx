@@ -1,11 +1,17 @@
 import Venta_actual from "@/components/Venta_actual";
 import estilos from "./cobrar.module.css";
 
-function Cobrar({ carrito, cambiarCantidad, eliminarProducto }) {
+function Cobrar({ carrito, cambiarCantidad, eliminarProducto,cobrar }) {
+
   const total = carrito.reduce(
     (suma, producto) => suma + producto.precio * producto.unidades,
     0,
   );
+
+
+
+
+  
   return (
     <div className={estilos.contenedor}>
       <div className={estilos.contenedor_cobro}>
@@ -26,7 +32,7 @@ function Cobrar({ carrito, cambiarCantidad, eliminarProducto }) {
             <h5 className={estilos.etiqueta_total}>Total de la venta</h5>
             <h5 className={estilos.monto_total}>{total.toFixed(2)}$</h5>
           </div>
-          <button className={estilos.boton_cobrar} type="button">
+          <button className={estilos.boton_cobrar} type="button" onClick={() => cobrar(carrito)}>
             Cobrar venta
           </button>
         </div>

@@ -1,3 +1,7 @@
+.contenedor {
+    width: 100%;
+    min-width: 0;
+}
 
 .estado_vacio {
     display: flex;
@@ -46,6 +50,10 @@
 .carrito{
     display: flex;
     flex-direction: row;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 64px;
+    flex-shrink: 0;
     box-shadow: var(--sombra-suave);
     padding: 15px;
     border-radius: 12px;
@@ -67,12 +75,19 @@
 .contenedor_carrito{
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    max-width: 100%;
     gap: 15px;
     justify-content: space-between;
+    padding: 10px;
+    max-height: calc((5 * 64px) + (4 * 15px) + (2 * 10px));
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .precio_producto {
     display: inline-flex;
+    flex-shrink: 0;
     align-items: center;
     gap: 6px;
     color: var(--color-texto-secundario);
@@ -118,6 +133,7 @@
 
 .contenedor_botones {
     display: flex;
+    flex-shrink: 0;
     gap: 10px    ;
     margin-right: 12px;
     border-radius: 12px;

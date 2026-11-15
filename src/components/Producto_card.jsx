@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import estilos from "./producto_card.module.css";
 function Producto_card({ producto, agregarProducto }) {
   return (

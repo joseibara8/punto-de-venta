@@ -1,5 +1,6 @@
 .contenedor{
-    width: 68%;
+    width: 70%;
+    min-width: 0;
     padding: 15px;
 
 }
@@ -26,12 +27,13 @@
     padding: 15px;
     border-radius: 18px;
     gap: 10px;
-    height: 90%;
+    height: 95%;
 }
 
 .pagar_contenedor{
-        display: flex;
+    display: flex;
     flex-direction: column;
+    margin-top: 10px;
 
 }
 

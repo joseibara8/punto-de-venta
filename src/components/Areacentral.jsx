@@ -66,7 +66,7 @@ export default function AreaCentral({ agregarProducto }) {
             </p>
           </div>
         ) : (
-          productosFiltrados.map((producto) => (
+          productosFiltrados.slice(0, 6).map((producto) => (
             <Producto_card
               key={producto.id}
               producto={producto}

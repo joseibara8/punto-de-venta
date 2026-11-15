@@ -12,14 +12,17 @@
     font-size: 22px;
 }
 .contenedor{
+    display: flex;
+    height: 100%;
     border: 2px solid var(--borde-barra-navegacion);
+    
 }
 .boton_agregar {
+    margin-top: auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 20px;
     min-height: 44px;
     padding: 10px 16px;
     border: none;

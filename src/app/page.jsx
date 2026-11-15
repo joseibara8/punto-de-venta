@@ -20,10 +20,29 @@ export default function Home() {
             : item,
         );
       }
-
       return [...carritoActual, { ...producto, unidades: 1 }];
+      
     });
+    
   }
+
+  async function cobrar(carrito) {
+
+
+    const res = await fetch("/api/venta", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(carrito),
+    });
+    const data = await res.json();
+    console.log(data)
+    setCarrito([])
+
+
+  }
+
 
   function cambiarCantidad(productoId, cambio) {
     setCarrito((carritoActual) =>
@@ -54,6 +73,7 @@ export default function Home() {
           carrito={carrito}
           cambiarCantidad={cambiarCantidad}
           eliminarProducto={eliminarProducto}
+          cobrar={cobrar}
         />
       </div>
     </div>

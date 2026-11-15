@@ -4,16 +4,15 @@ import { useState } from "react";
 import estilos from "./nav_izquierdo.module.css";
 
 const opciones = [
-  { nombre: "Ventas", icono: "shopping-cart" },
-  { nombre: "Productos", icono: "box" },
+  { nombre: "Punto de venta", icono: "shopping-cart" },
+  { nombre: "Ventas", icono: "receipt" },
   { nombre: "Inventario", icono: "boxes" },
-  { nombre: "Clientes", icono: "users" },
   { nombre: "Reportes", icono: "chart-histogram" },
   { nombre: "Configuración", icono: "settings" },
 ];
 
 function Nav_izquierdo() {
-  const [activo, setActivo] = useState("Ventas");
+  const [activo, setActivo] = useState("Punto de venta");
   const [contraido, setContraido] = useState(false);
 
   return (
