@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import estilos from "./areacentral.module.css";
 import Producto_card from "@/components/Producto_card";
 
-export default function AreaCentral({ agregarProducto }) {
+export default function AreaCentral({ agregarProducto,versionProductos  }) {
   const [valorinput, setValorinput] = useState("");
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -27,7 +27,7 @@ export default function AreaCentral({ agregarProducto }) {
       }
     }
     cargarProductos();
-  }, []);
+  }, [versionProductos ]);
 
   const textobuscado = valorinput.trim().toLocaleLowerCase();
 

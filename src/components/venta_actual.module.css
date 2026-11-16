@@ -163,6 +163,9 @@
     transform: translateY(-1px);
     box-shadow: var(--sombra-suave);
 }
+.error{
+    color: red;
+}
 
 .contenedor_botones button:active {
     transform: translateY(0) scale(0.94);

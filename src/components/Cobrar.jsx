@@ -1,7 +1,7 @@
 import Venta_actual from "@/components/Venta_actual";
 import estilos from "./cobrar.module.css";
 
-function Cobrar({ carrito, cambiarCantidad, eliminarProducto,cobrar }) {
+function Cobrar({ carrito, cambiarCantidad, eliminarProducto,cobrar,error_cantidad }) {
 
   const total = carrito.reduce(
     (suma, producto) => suma + producto.precio * producto.unidades,
@@ -24,6 +24,7 @@ function Cobrar({ carrito, cambiarCantidad, eliminarProducto,cobrar }) {
           carrito={carrito}
           cambiarCantidad={cambiarCantidad}
           eliminarProducto={eliminarProducto}
+          error_cantidad={error_cantidad}
         />
 
         
@@ -35,6 +36,7 @@ function Cobrar({ carrito, cambiarCantidad, eliminarProducto,cobrar }) {
           <button className={estilos.boton_cobrar} type="button" onClick={() => cobrar(carrito)}>
             Cobrar venta
           </button>
+          <span className={estilos.error}>error</span>
         </div>
       </div>
     </div>

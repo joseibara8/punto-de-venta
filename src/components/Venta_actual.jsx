@@ -1,6 +1,6 @@
 import estilos from "./venta_actual.module.css";
 
-function Venta_actual({ carrito, cambiarCantidad, eliminarProducto }) {
+function Venta_actual({ carrito, cambiarCantidad, eliminarProducto,error_cantidad }) {
   return (
     <div className={estilos.contenedor}>
       {carrito.length === 0 ? (
@@ -28,7 +28,7 @@ function Venta_actual({ carrito, cambiarCantidad, eliminarProducto }) {
                 <button
                   type="button"
                   aria-label={`Aumentar cantidad de ${producto.nombre}`}
-                  onClick={() => cambiarCantidad(producto.id, 1)}
+                  onClick={() => cambiarCantidad(producto.id, 1,Number(producto.cantidad))}
                 >
                   <i className="fi fi-br-plus" aria-hidden="true"></i>
                 </button>
@@ -44,10 +44,12 @@ function Venta_actual({ carrito, cambiarCantidad, eliminarProducto }) {
               >
                 <i className="fi fi-sr-trash" aria-hidden="true"></i>
               </button>
-            </div>
+              
+            </div>  
           ))}
         </div>
-      )}
+        
+      )}<span className={estilos.error}>{error_cantidad}</span>
     </div>
   );
 }

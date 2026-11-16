@@ -25,6 +25,7 @@ export async function POST(request) {
 
       const id = Number(producto?.id);
       const unidades = Number(producto?.unidades);
+      const nombre_producto = producto?.nombre ?? id;
 
       if (!Number.isInteger(id) || id <= 0 ||
           !Number.isFinite(unidades) || unidades <= 0) {
@@ -48,7 +49,7 @@ export async function POST(request) {
         await cliente.query("ROLLBACK");
 
         return NextResponse.json(
-          { error: `El producto ${nombre_producto} no existe o tiene stock insuficiente` },
+          { error: `El producto ${nombre_producto} tiene stock insuficiente` },
           { status: 409 },
         );
       }
