@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import estilos from "./nav_izquierdo.module.css";
 
 const opciones = [
@@ -12,8 +13,12 @@ const opciones = [
 ];
 
 function Nav_izquierdo() {
+  const pathname = usePathname();
+  const router = useRouter();
   const [activo, setActivo] = useState("Punto de venta");
   const [contraido, setContraido] = useState(false);
+  const apartadoActivo =
+    pathname === "/inventario" ? "Inventario" : activo;
 
   return (
     <aside
@@ -43,13 +48,30 @@ function Nav_izquierdo() {
         {opciones.map(({ nombre, icono }, indice) => (
           <button
             key={nombre}
-            style={{ "--retraso-opcion": `${(indice + 1) * 0.2}s` }}
+            style={{ "--retraso-opcion": `${(indice + 1) * 0.15}s` }}
             type="button"
-            className={`${estilos.boton} ${activo === nombre ? estilos.activo : ""}`}
-            aria-pressed={activo === nombre}
+            className={`${estilos.boton} ${
+              apartadoActivo === nombre ? estilos.activo : ""
+            }`}
+            aria-pressed={apartadoActivo === nombre}
             aria-label={nombre}
             title={contraido ? nombre : undefined}
-            onClick={() => setActivo(nombre)}
+            onClick={() => {
+              setActivo(nombre);
+
+              if (nombre === "Inventario") {
+                router.push("/inventario");
+              }
+              if (nombre === "Punto de venta") {
+                router.push("/");
+              }
+              if (nombre === "Ventas") {
+                router.push("/ventas");
+              }
+              if (nombre === "Reportes") {
+                router.push("/reportes");
+              }
+            }}
           >
             <i className={`fi fi-rr-${icono}`} aria-hidden="true" />
             <span>{nombre}</span>

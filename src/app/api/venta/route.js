@@ -22,13 +22,16 @@ export async function POST(request) {
     let ganancias = 0;
 
     for (const producto of carrito) {
-
       const id = Number(producto?.id);
       const unidades = Number(producto?.unidades);
       const nombre_producto = producto?.nombre ?? id;
 
-      if (!Number.isInteger(id) || id <= 0 ||
-          !Number.isFinite(unidades) || unidades <= 0) {
+      if (
+        !Number.isInteger(id) ||
+        id <= 0 ||
+        !Number.isFinite(unidades) ||
+        unidades <= 0
+      ) {
         await cliente.query("ROLLBACK");
 
         return NextResponse.json(
@@ -56,38 +59,43 @@ export async function POST(request) {
 
       const { nombre, precio, costo } = resultado.rows[0];
 
-      productos.push(nombre);
+      const total_producto = Number(precio) * unidades;
+
+      productos.push({
+        nombre,
+        precio: Number(precio),
+        unidades,
+        total_producto,
+      });
       total += Number(precio) * unidades;
       ganancias += (Number(precio) - Number(costo)) * unidades;
     }
 
     const nuevaVenta = await cliente.query(
       `INSERT INTO ventas (productos, total, ganancias)
-       VALUES ($1, $2, $3)
-       RETURNING id`,
-      [productos.join(", "), total, ganancias],
+   VALUES ($1, $2, $3)
+   RETURNING id`,
+      [JSON.stringify(productos), total, ganancias],
     );
 
     const valor_caja = await cliente.query(
-  `UPDATE caja
+      `UPDATE caja
    SET ganancias = COALESCE(ganancias, 0) + $1,
        total = COALESCE(total, 0) + $2
    RETURNING ganancias, total`,
-  [ganancias, total],
-);
-
-    
-
-    await cliente.query("COMMIT");
-   
-
-    return NextResponse.json(
-      { mensaje: "Venta guardada y caja actualizada", 
-        id: nuevaVenta.rows[0].id,
-        venta:valor_caja.rows[0]},
-      { status: 201 },
+      [ganancias, total],
     );
 
+    await cliente.query("COMMIT");
+
+    return NextResponse.json(
+      {
+        mensaje: "Venta guardada y caja actualizada",
+        id: nuevaVenta.rows[0].id,
+        venta: valor_caja.rows[0],
+      },
+      { status: 201 },
+    );
   } catch (error) {
     if (cliente) {
       await cliente.query("ROLLBACK").catch(console.error);

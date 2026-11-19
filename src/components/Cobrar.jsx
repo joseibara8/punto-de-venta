@@ -36,7 +36,6 @@ function Cobrar({ carrito, cambiarCantidad, eliminarProducto,cobrar,error_cantid
           <button className={estilos.boton_cobrar} type="button" onClick={() => cobrar(carrito)}>
             Cobrar venta
           </button>
-          <span className={estilos.error}>error</span>
         </div>
       </div>
     </div>

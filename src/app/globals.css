@@ -7,29 +7,35 @@
 
 :root {
   color-scheme: dark;
-  --negro: #000;
-  --blanco: #2b3545;
-  --fondo-pagina: #171b24;
-  --color-texto-pagina: #edf1f7;
-  --color-texto-secundario: #b6c0d0;
-  --fondo-input: #202a39;
-  --fondo-barra-navegacion: #1d2532;
-  --fondo-iconos: #222c3b;
-  --borde-barra-navegacion: #303b4c;
-  --color-enlace-hover: rgb(255 255 255 / 65%);
-  --color-subrayado: #8792a5;
-  --fondo-boton-tema: #293449;
-  --color-boton-tema: #FFC107;
-  --color-boton: #6b5cc7;
-  --color-acento: #a5b4fc;
-  --color-acento1: rgb(165 180 252 / 12%);
-  --color-acento2: #c4b5fd;
+
+  --ciruela-eclipse: #2C1E32;
+  --seda-titanio: #F2EDE7;
+  --destello-ambar: #FF8C12;
+
+  --negro: #17121B;
+  --blanco: #382B3E;
+  --fondo-pagina: var(--ciruela-eclipse);
+  --color-texto-pagina: var(--seda-titanio);
+  --color-texto-secundario: #BEB8B2;
+  --fondo-input: #382B3E;
+  --fondo-barra-navegacion: #211827;
+  --fondo-iconos: #382B3E;
+  --borde-barra-navegacion: #4B3C50;
+  --color-enlace-hover: var(--destello-ambar);
+  --color-subrayado: var(--destello-ambar);
+  --fondo-boton-tema: #382B3E;
+  --color-boton-tema: var(--destello-ambar);
+  --color-boton: var(--destello-ambar);
+
+  --color-acento: var(--destello-ambar);
+  --color-acento1: rgb(255 140 18 / 12%);
+  --color-acento2: #FFAD45;
+
   --sombra-suave: 0 2px 6px rgb(0 0 0 / 22%);
   --sombra-elevada: 0 10px 10px rgb(0 0 0 / 30%);
   --sombra-amplia: 0 15px 10px rgb(0 0 0 / 32%);
   --sombra-hover: 0 6px 12px rgb(0 0 0 / 32%);
 }
-
 html[data-theme="light"] {
   color-scheme: light;
   --blanco:white;

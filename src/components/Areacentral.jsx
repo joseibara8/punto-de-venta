@@ -1,33 +1,13 @@
 ﻿"use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import estilos from "./areacentral.module.css";
 import Producto_card from "@/components/Producto_card";
+import { useProductos } from "@/context/ProductosContext";
 
-export default function AreaCentral({ agregarProducto,versionProductos  }) {
+export default function AreaCentral({ agregarProducto }) {
   const [valorinput, setValorinput] = useState("");
-  const [productos, setProductos] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    async function cargarProductos() {
-      try {
-        const respuesta = await fetch("/api/productos");
-
-        if (!respuesta.ok) {
-          throw new Error("No se pudieron cargar los productos");
-        }
-        const datos = await respuesta.json();
-        setProductos(datos);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setCargando(false);
-      }
-    }
-    cargarProductos();
-  }, [versionProductos ]);
+  const { productos, cargando, error } = useProductos();
 
   const textobuscado = valorinput.trim().toLocaleLowerCase();
 

@@ -1,14 +1,14 @@
 "use client";
-import Nav_izquierdo from "@/components/Nav_izquierdo";
 import Navbar from "@/components/Navbar";
 import Areacentral from "@/components/Areacentral";
 import Cobrar from "@/components/Cobrar";
 import estilos from "./page.module.css";
 import { useState } from "react";
+import { useProductos } from "@/context/ProductosContext";
 
 export default function Home() {
+  const { cargarProductos } = useProductos();
   const [carrito, setCarrito] = useState([]);
-  const [versionProductos, setVersionProductos] = useState(0);
   const [error_cantidad, setError_cantidad] = useState("");
 
   function agregarProducto(producto, productoCantidad1) {
@@ -55,8 +55,14 @@ export default function Home() {
     });
     const data = await res.json();
     console.log(data);
+
+    if (!res.ok) {
+      setError_cantidad(data.error ?? "No se pudo completar la venta");
+      return;
+    }
+
+    await cargarProductos();
     setCarrito([]);
-    setVersionProductos((version) => version + 1);
     setError_cantidad("");
   }
 
@@ -88,17 +94,14 @@ export default function Home() {
     <div className={estilos.pagina}>
       <Navbar />
       <div className={estilos.contenido}>
-        <Nav_izquierdo />
         <Areacentral
           agregarProducto={agregarProducto}
-          versionProductos={versionProductos}
         />
         <Cobrar
           carrito={carrito}
           cambiarCantidad={cambiarCantidad}
           eliminarProducto={eliminarProducto}
           cobrar={cobrar}
-          versionProductos={versionProductos}
           error_cantidad={error_cantidad}
         />
       </div>
