@@ -3,14 +3,16 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const result = await pool.query("SELECT * FROM productos");
+    const result = await pool.query(`SELECT *
+FROM productos
+ORDER BY nombre ASC`);
     return NextResponse.json(result.rows);
   } catch (error) {
     console.error("Error al cargar productos:", error);
 
     return NextResponse.json(
       { error: "No se pudieron cargar los productos" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -63,6 +65,59 @@ export async function PUT(request) {
     console.error("Error al actualizar producto:", error);
     return NextResponse.json(
       { error: "No se pudo actualizar el producto" },
+      { status: 500 },
+    );
+  }
+}
+
+export async function POST(request) {
+  try {
+    const producto = await request.json();
+        const cantidad = Number(producto?.cantidad);
+    const precio = Number(producto?.precio);
+    const costo = Number(producto?.costo);
+    const nombre = producto?.nombre?.trim();
+    const categoria = producto?.categoria?.trim();
+
+    if (
+      cantidad === "" ||
+      precio === "" ||
+      costo === "" ||
+      nombre === "" ||
+      categoria === ""
+    ) {
+      return NextResponse.json(
+        { error: "hay un campo vacio" },
+        { status: 500 },
+      );
+    }
+
+    if (costo > precio) {
+      return NextResponse.json(
+        {
+          error:
+            "estas confundiendo los campos el costo no puede ser mayor al precio",
+        },
+        { status: 500 },
+      );
+    }
+
+    const resultado = await pool.query(
+      `INSERT INTO productos (nombre, categoria, cantidad, precio, costo)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING id`,
+      [nombre, categoria, cantidad, precio, costo],
+    );
+     return NextResponse.json(
+      {
+        mensaje: "Producto creado correctamente",
+        producto: resultado.rows[0],
+      },
+      { status: 201 },
+    );
+  } catch (error) {
+     return NextResponse.json(
+      { error: "Ocurrió un error al crear el producto" },
       { status: 500 },
     );
   }

@@ -1,6 +1,10 @@
 .contenedor_navs {
   --duracion-despliegue: 0.8s;
-  position: relative;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100dvh;
+  overflow-y: auto;
   flex-shrink: 0;
   transition: width var(--duracion-despliegue) ease;
   width: 20%;

@@ -81,10 +81,21 @@ gap: 12px  ;
 }
 .contenedor_indicadores{
 display: grid;
-    grid-template-columns: 4fr 2fr 2fr 1fr 1fr 1fr;
+    grid-template-columns: 4fr 3fr 1fr 2fr 2fr 2fr;
   background-color: var(--color-boton-transparente);
   width: 100%;
   padding: 10px;
   border-radius: 8px;
   justify-content: space-around;
+}
+.contenedor_indicadores span{
+  text-align: center;
+}
+
+.contenedor_indicadores span:first-child{
+    text-align: start;
+}
+
+.contenedor_indicadores span:last-child{
+    text-align: end;
 }

@@ -13,7 +13,11 @@ function crearFormulario(producto) {
   };
 }
 
-export default function EditarProductoModal({ producto, onCerrar, onGuardado }) {
+export default function EditarProductoModal({
+  producto,
+  onCerrar,
+  onGuardado,
+}) {
   const [formulario, setFormulario] = useState(() => crearFormulario(producto));
   const [guardando, setGuardando] = useState(false);
   const [error, setError] = useState("");
@@ -59,47 +63,99 @@ export default function EditarProductoModal({ producto, onCerrar, onGuardado }) 
         aria-labelledby="titulo-editar-producto"
         onMouseDown={(evento) => evento.stopPropagation()}
       >
-        <button className={estilos.boton_cerrar} type="button" onClick={onCerrar}>
+        <button
+          className={estilos.boton_cerrar}
+          type="button"
+          onClick={onCerrar}
+        >
           <i className="fi fi-rr-cross" aria-hidden="true"></i>
         </button>
         <h2 id="titulo-editar-producto">Editar producto</h2>
-        <p className={estilos.subtitulo}>Actualiza la información del producto</p>
+        <p className={estilos.subtitulo}>
+          Actualiza la información del producto
+        </p>
 
         <form onSubmit={guardar}>
           <label>
             Nombre del producto
-            <input name="nombre" value={formulario.nombre} onChange={cambiarCampo} required />
+            <input
+              name="nombre"
+              value={formulario.nombre}
+              onChange={cambiarCampo}
+              required
+            />
           </label>
 
           <div className={estilos.dos_columnas}>
             <label>
               Categoría
-              <input name="categoria" value={formulario.categoria} onChange={cambiarCampo} required />
+              <input
+                name="categoria"
+                value={formulario.categoria}
+                onChange={cambiarCampo}
+                required
+              />
             </label>
             <label>
               Precio de venta
-              <input name="precio" type="number" min="0" step="0.01" value={formulario.precio} onChange={cambiarCampo} required />
+              <input
+                name="precio"
+                type="number"
+                min="0"
+                step="0.01"
+                value={formulario.precio}
+                onChange={cambiarCampo}
+                required
+              />
             </label>
           </div>
 
           <div className={estilos.dos_columnas}>
             <label>
               Costo
-              <input name="costo" type="number" min="0" step="0.01" value={formulario.costo} onChange={cambiarCampo} required />
+              <input
+                name="costo"
+                type="number"
+                min="0"
+                step="0.01"
+                value={formulario.costo}
+                onChange={cambiarCampo}
+                required
+              />
             </label>
             <label>
               Existencias actuales
-              <input name="cantidad" type="number" min="0" step="0.001" value={formulario.cantidad} onChange={cambiarCampo} required />
+              <input
+                name="cantidad"
+                type="number"
+                min="0"
+                step="0.001"
+                value={formulario.cantidad}
+                onChange={cambiarCampo}
+                required
+              />
             </label>
           </div>
 
-          {error && <p className={estilos.error} role="alert">{error}</p>}
+          {error && (
+            <p className={estilos.error} role="alert">
+              {error}
+            </p>
+          )}
 
           <div className={estilos.acciones}>
-            <button className={estilos.boton_cancelar} type="button" onClick={onCerrar}>
+            <button
+              className={estilos.boton_cancelar}
+              type="button"
+              onClick={onCerrar}
+            >
               Cancelar
             </button>
-            <button className={estilos.boton_guardar} type="submit" disabled={guardando}>
+            <button
+              className={estilos.boton_guardar}
+              type="submit"
+              disabled={guardando}
+            >
               {guardando ? "Guardando..." : "Guardar cambios"}
             </button>
           </div>

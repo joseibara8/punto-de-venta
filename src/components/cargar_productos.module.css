@@ -1,6 +1,6 @@
 .contenedor {
   display: grid;
-  grid-template-columns: 4fr 2fr 2fr 1fr 1fr 1fr;
+  grid-template-columns: 4fr 3fr 1fr 2fr 2fr 2fr;
   width: 100%;
   padding: 10px;
   border-radius: 0px;
@@ -21,7 +21,12 @@
 .dato {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+}
+
+.dato:first-child{
+    justify-content: start;
 }
 
 .dato i {
