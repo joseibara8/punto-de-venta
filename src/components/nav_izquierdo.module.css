@@ -1,5 +1,5 @@
 .contenedor_navs {
-  --duracion-despliegue: 0.8s;
+  --duracion-despliegue: 0.3s;
   position: sticky;
   top: 0;
   align-self: flex-start;
@@ -205,7 +205,7 @@
 }
 .contenedor_navs:not(.contraido) .marca > div,
 .contenedor_navs:not(.contraido) .etiqueta {
-  animation: mostrarTexto 1s ease var(--duracion-despliegue) both;
+  animation: mostrarTexto 0.35s ease var(--duracion-despliegue) both;
 }
 
 @keyframes mostrarTexto {
@@ -239,7 +239,7 @@
 }
 
 .contenedor_navs:not(.contraido) .boton > span {
-  animation: mostrarTexto 1s ease both;
+  animation: mostrarTexto 0.35s ease both;
   animation-delay: calc(
     var(--duracion-despliegue) + 0s + var(--retraso-opcion)
   );

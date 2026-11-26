@@ -1,0 +1,144 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  gap: 15px;
+}
+.contenedor_titulo{
+    padding: 30px 0;
+}
+.contenedor_titulo h2 {
+  font-size: 42px;
+  color: var(--color-acento);
+}
+
+.contenedor_titulo span {
+  font-size: 22px;
+  color: var(--color-texto-secundario);
+}
+
+.contenedor_subtitulos {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.contenedor_subtitulos > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  background-color: var(--color-acento1);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: var(--sombra-suave);
+}
+
+.contenido_subtitulo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+
+}
+
+.contenido_subtitulo :first-child {
+  font-size: 22px;
+}
+.contenido_subtitulo :last-child {
+  font-size: 30px;
+}
+
+.subtitulo > i {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background-color: var(--color-acento);
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+
+
+
+}
+
+.subtitulo h4 {
+  font-size: 22px;
+}
+.contenedor_inputs {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.contenedor_search {
+  padding: 20px 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  gap: 20px;
+}
+.barra_busqueda {
+  background-color: var(--fondo-barra-navegacion);
+  border-radius: 12px;
+  border: 1px solid var(--borde-barra-navegacion);
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  align-items: center;
+  padding: 15px;
+  box-shadow: var(--sombra-suave);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.barra_busqueda:hover,
+.barra_busqueda:focus-within {
+  border-color: var(--color-acento);
+  box-shadow: var(--sombra-hover);
+  transform: translateY(-1px);
+}
+
+.barra_busqueda input {
+  border: none;
+  background-color: transparent;
+  width: 95%;
+  outline: none;
+}
+.barra_busqueda i {
+  align-self: end;
+}
+
+.contenedor_ventas{
+    background-color: var(--blanco);
+    padding:15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.contenedor_indicadores{
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr 2fr 2fr 2fr;
+    background: var(--color-acento1);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: start;
+    justify-content: center;
+}
+
+.contenedor_indicadores span{
+    text-align: center;
+    font-size: 20px
+}
+
+.contenedor_indicadores span:first-child{
+justify-content: start;
+}
+
+.contenedor_indicadores span:last-child{
+justify-content: end;
+}

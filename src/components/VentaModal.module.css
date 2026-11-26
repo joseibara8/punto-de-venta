@@ -1,0 +1,134 @@
+.fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgb(31 27 44 / 48%);
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  position: relative;
+  width: min(100%, 560px);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding: 28px 30px 24px;
+  border-radius: 18px;
+  background: var(--fondo-barra-navegacion);
+  box-shadow: 0 18px 48px rgb(0 0 0 / 45%);
+  will-change: transform, opacity;
+  animation: subir_modal 0.4s both;
+}
+
+.boton_cerrar {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: var(--color-acento1);
+  color: var(--color-acento);
+  cursor: pointer;
+}
+
+.boton_cerrar:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+.cajero {
+  margin: 12px 0 24px;
+  color: var(--color-texto-secundario);
+}
+
+.productos {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 24px;
+  list-style: none;
+}
+
+.productos li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--color-acento1);
+}
+
+.total {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.marcadores {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  justify-content: center;
+  text-align: center;
+
+}
+
+.marcadores :first-child{
+    text-align: start;
+    
+}
+
+.contenedor_productos {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  justify-content: center;
+  text-align: center;
+  border-top: 1px solid black;
+  padding-top: 5px;
+  gap: 0px;
+  margin: 0;
+}
+.contenedor_productos :first-child{
+    text-align: start;
+}
+
+.contenedor_total{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: var(--color-acento1);
+    border-radius: 12px;
+    
+}
+
+.contenedor_total span{
+    font-size: 22px;
+}
+
+.contenedor_subtitulo{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+.contenedor_subtitulo span{
+
+    padding: 9px;
+    border-radius: 12px;
+    border: 3px solid var(--color-acento);
+    color: var(--color-acento);
+    font-size: 16px;
+
+}
+
+.contenedor_titulo{
+    display: flex;
+    font-size: 32px;
+}

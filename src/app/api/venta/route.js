@@ -18,6 +18,7 @@ export async function POST(request) {
     await cliente.query("BEGIN");
 
     const productos = [];
+    const cajero = "Ana lopez";
     let total = 0;
     let ganancias = 0;
 
@@ -72,16 +73,19 @@ export async function POST(request) {
     }
 
     const nuevaVenta = await cliente.query(
-      `INSERT INTO ventas (productos, total, ganancias)
-   VALUES ($1, $2, $3)
-   RETURNING id`,
-      [JSON.stringify(productos), total, ganancias],
+      `INSERT INTO ventas (
+    cajero, cantidad_de_productos, productos, total, ganancias
+  )
+  VALUES ($1, $2, $3, $4, $5)
+  RETURNING id`,
+      [cajero, productos.length, JSON.stringify(productos), total, ganancias],
     );
 
     const valor_caja = await cliente.query(
       `UPDATE caja
    SET ganancias = COALESCE(ganancias, 0) + $1,
-       total = COALESCE(total, 0) + $2
+       total = COALESCE(total, 0) + $2,
+       numero_venta = numero_venta +1
    RETURNING ganancias, total`,
       [ganancias, total],
     );
@@ -109,5 +113,21 @@ export async function POST(request) {
     );
   } finally {
     cliente?.release();
+  }
+}
+
+export async function GET() {
+  try {
+    const result = await pool.query(`SELECT *
+FROM ventas
+ORDER BY id DESC`);
+    return NextResponse.json(result.rows);
+  } catch (error) {
+    console.error("Error al cargar productos:", error);
+
+    return NextResponse.json(
+      { error: "No se pudieron cargar las ventas" },
+      { status: 500 },
+    );
   }
 }

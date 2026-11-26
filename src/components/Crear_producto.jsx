@@ -64,7 +64,7 @@ export default function Crear_producto({ guardar, onCerrar }) {
             </div>
           </div>
           <div className={estilos.acciones}>
-            <button className={estilos.boton_cancelar} type="button" onClick={() =>{onCerrar}}>
+            <button className={estilos.boton_cancelar} type="button" onClick={onCerrar}>
               Cancelar
             </button>
             <button

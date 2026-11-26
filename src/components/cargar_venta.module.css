@@ -1,0 +1,111 @@
+.contenedor {
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr 2fr 2fr 2fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 0px;
+  border-radius: 12px;
+  background-color: var(--fondo-pagina);
+  border: 1px solid var(--borde-barra-navegacion);
+  text-align: center;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.contenedor span {
+  font-size: 19px;
+}
+
+.contenedor:hover {
+  border-color: var(--color-acento);
+  box-shadow: var(--sombra-suave);
+  transform: translateY(-1px);
+}
+
+.dato_venta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 0;
+  color: var(--color-texto-secundario);
+}
+
+.dato_venta i {
+  flex-shrink: 0;
+  color: var(--color-acento);
+  font-size: 15px;
+}
+
+.contenedor_accion {
+  display: flex;
+  justify-content: center;
+}
+
+.boton_detalle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-acento);
+  border-radius: 9px;
+  background: var(--color-acento1);
+  color: var(--color-acento);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.boton_detalle i {
+  display: flex;
+  font-size: 15px;
+}
+
+.boton_detalle:hover {
+  background: var(--color-acento);
+  color: var(--fondo-pagina);
+  box-shadow: var(--sombra-hover);
+  transform: translateY(-1px);
+}
+
+.boton_detalle:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.boton_detalle:focus-visible {
+  outline: 2px solid var(--color-acento2);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .contenedor {
+    grid-template-columns: 1fr 2fr 2fr 2fr 1.5fr 1.5fr;
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .boton_detalle {
+    padding: 8px;
+  }
+
+  .boton_detalle span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contenedor,
+  .boton_detalle {
+    transition: none;
+  }
+}

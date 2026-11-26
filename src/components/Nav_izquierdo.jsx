@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import estilos from "./nav_izquierdo.module.css";
 
 const opciones = [
-  { nombre: "Punto de venta", icono: "shopping-cart" },
+  { nombre: "Home", icono: "shopping-cart" },
   { nombre: "Ventas", icono: "receipt" },
   { nombre: "Inventario", icono: "boxes" },
   { nombre: "Reportes", icono: "chart-histogram" },
@@ -48,7 +48,7 @@ function Nav_izquierdo() {
         {opciones.map(({ nombre, icono }, indice) => (
           <button
             key={nombre}
-            style={{ "--retraso-opcion": `${(indice + 1) * 0.15}s` }}
+            style={{ "--retraso-opcion": `${(indice + 1) * 0.06}s` }}
             type="button"
             className={`${estilos.boton} ${
               apartadoActivo === nombre ? estilos.activo : ""
@@ -62,7 +62,7 @@ function Nav_izquierdo() {
               if (nombre === "Inventario") {
                 router.push("/inventario");
               }
-              if (nombre === "Punto de venta") {
+              if (nombre === "Home") {
                 router.push("/");
               }
               if (nombre === "Ventas") {

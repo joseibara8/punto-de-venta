@@ -1,5 +1,4 @@
 "use client";
-import Nav_izquierdo from "@/components/Nav_izquierdo";
 import React, { useState } from "react";
 import { useProductos } from "@/context/ProductosContext";
 import estilos from "./inventario.module.css";
@@ -7,29 +6,54 @@ import Cargar_productos from "@/components/Cargar_productos";
 import EditarProductoModal from "@/components/EditarProductoModal";
 import Crear_producto from "@/components/Crear_producto";
 
+
+function normalizarTexto(texto) {
+  return String(texto ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
 export default function Inventario() {
   const { productos, cargando, cargarProductos } = useProductos();
   const [modalAbierto, setModalAbierto] = useState(false);
   const [productoEditar, setProductoEditar] = React.useState(null);
+  const [busqueda, setBusqueda] = useState("");
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
+
   if (cargando) return <p>Cargando productos...</p>;
 
-async function guardar(productoNuevo) {
-  const res = await fetch("/api/productos", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(productoNuevo),
+  const textoBuscado = normalizarTexto(busqueda);
+
+  const productosPorNombre = productos.filter((producto) =>
+    normalizarTexto(producto.nombre).includes(textoBuscado),
+  );
+
+  const productosFiltrados = productosPorNombre.filter((producto) => {
+    if (categoriaSeleccionada === "") {
+      return true;
+    }
+
+    return producto.categoria === categoriaSeleccionada;
   });
 
-  if (!res.ok) {
-    console.log(productoNuevo);
-    
-    console.error("No se pudo agregar el producto");
-    return;
-  }
+  async function guardar(productoNuevo) {
+    const res = await fetch("/api/productos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(productoNuevo),
+    });
 
-  await cargarProductos();
-  setModalAbierto(false);
-}
+    if (!res.ok) {
+
+      console.error("No se pudo agregar el producto");
+      return;
+    }
+
+    await cargarProductos();
+    setModalAbierto(false);
+  }
   return (
     <div className={estilos.contenedor}>
       <div className={estilos.contenedor_titulo}>
@@ -49,19 +73,33 @@ async function guardar(productoNuevo) {
           <input
             type="search"
             placeholder="Escribe el nombre del producto que quieras buscar"
+            value={busqueda}
+            onChange={(evento) => setBusqueda(evento.target.value)}
           />
         </div>
+        <select
+          className={estilos.select}
+          value={categoriaSeleccionada}
+          onChange={(e) => setCategoriaSeleccionada(e.target.value)}
+        >
+          <option value="">Todas las categorías</option>
+          {productos.map((producto) => (
+            <option key={producto.id} value={producto.categoria}>
+              {producto.categoria}
+            </option>
+          ))}
+        </select>
       </div>
       <div className={estilos.contenedor_ventas}>
         <div className={estilos.contenedor_indicadores}>
-          <span>producto</span>
-          <span>categoria</span>
-          <span>existencias</span>
-          <span>precio</span>
-          <span>costo</span>
-          <span>acciones</span>
+          <span>Producto</span>
+          <span>Categoria</span>
+          <span>Existencias</span>
+          <span>Precio</span>
+          <span>Costo</span>
+          <span>Acciones</span>
         </div>
-        {productos.map((producto) => (
+        {productosFiltrados.map((producto) => (
           <Cargar_productos
             key={producto.id}
             productos={producto}
@@ -71,17 +109,19 @@ async function guardar(productoNuevo) {
       </div>
       {modalAbierto && (
         <Crear_producto
-          onCerrar={() => setModalAbierto(false)}
-          onProductoAgregado={async () => {
-            await cargarProductos();
-            setModalAbierto(false);
-          }}
-        />
-      )}
-      {modalAbierto && (
-        <Crear_producto
           guardar={guardar}
           onCerrar={() => setModalAbierto(false)}
+        />
+      )}
+
+      {productoEditar && (
+        <EditarProductoModal
+          producto={productoEditar}
+          onCerrar={() => setProductoEditar(null)}
+          onGuardado={async () => {
+            await cargarProductos();
+            setProductoEditar(null);
+          }}
         />
       )}
     </div>

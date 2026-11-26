@@ -5,14 +5,22 @@ import estilos from "./areacentral.module.css";
 import Producto_card from "@/components/Producto_card";
 import { useProductos } from "@/context/ProductosContext";
 
+function normalizarTexto(texto) {
+  return String(texto ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
 export default function AreaCentral({ agregarProducto }) {
   const [valorinput, setValorinput] = useState("");
   const { productos, cargando, error } = useProductos();
 
-  const textobuscado = valorinput.trim().toLocaleLowerCase();
+  const textobuscado = normalizarTexto(valorinput);
 
   const productosFiltrados = productos.filter((producto) => {
-    return producto.nombre.toLowerCase().includes(textobuscado);
+    return normalizarTexto(producto.nombre).includes(textobuscado);
   });
 
   return (

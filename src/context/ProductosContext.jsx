@@ -7,17 +7,20 @@ const ProductosContext = createContext(null);
 
 export function ProductosProvider({ children }) {
   const [productos, setProductos] = useState([]);
-  const [cargando, setCargando] = useState(true);
+  const [cargando, setcargando] = useState(true);
   const [error, setError] = useState("");
 
   async function cargarProductos() {
-    setCargando(true);
+    setcargando(true);
     setError("");
 
     try {
       const respuesta = await fetch("/api/productos");
+
+      
       const datos = await respuesta.json();
 
+      
       if (!respuesta.ok) {
         throw new Error(datos.error ?? "No se pudieron cargar los productos");
       }
@@ -27,7 +30,7 @@ export function ProductosProvider({ children }) {
       setError(error.message);
       setProductos([]);
     } finally {
-      setCargando(false);
+      setcargando(false);
     }
   }
 
