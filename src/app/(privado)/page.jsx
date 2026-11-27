@@ -1,56 +1,54 @@
 "use client";
+
 import Areacentral from "@/components/Areacentral";
 import Cobrar from "@/components/Cobrar";
 import estilos from "./page.module.css";
 import { useState } from "react";
 import { useProductos } from "@/context/ProductosContext";
 import { useVentas } from "@/context/VentasContext";
+import { useSession } from "@/context/SessionContext";
 
-
-export default function Home() {
+export default function Page() {
   const { cargarProductos } = useProductos();
+  const { actualizarDatos } = useVentas();
+  const { nombre: cajero } = useSession();
+
   const [carrito, setCarrito] = useState([]);
   const [error_cantidad, setError_cantidad] = useState("");
-  const {actualizarDatos} = useVentas();
-
-
-
-  
-
 
   function agregarProducto(producto, productoCantidad1) {
-  const stock = Number(productoCantidad1);
-  const itemActual = carrito.find((item) => item.id === producto.id);
-  const unidadesActuales = itemActual ? Number(itemActual.unidades) : 0;
+    const stock = Number(productoCantidad1);
+    const itemActual = carrito.find((item) => item.id === producto.id);
+    const unidadesActuales = itemActual ? Number(itemActual.unidades) : 0;
 
-  if (!Number.isFinite(stock)) {
-    setError_cantidad("*No se pudo comprobar el stock*");
-    return;
-  }
-
-  if (unidadesActuales + 1 > stock) {
-    setError_cantidad(`*Solo hay ${stock} unidades disponibles*`);
-    return;
-  }
-
-  setError_cantidad("");
-
-  setCarrito((carritoActual) => {
-    const existe = carritoActual.some((item) => item.id === producto.id);
-
-    if (existe) {
-      return carritoActual.map((item) => {
-        if (item.id === producto.id && Number(item.unidades) + 1 <= stock) {
-          return { ...item, unidades: Number(item.unidades) + 1 };
-        }
-
-        return item;
-      });
+    if (!Number.isFinite(stock)) {
+      setError_cantidad("*No se pudo comprobar el stock*");
+      return;
     }
 
-    return [...carritoActual, { ...producto, unidades: 1 }];
-  });
-}
+    if (unidadesActuales + 1 > stock) {
+      setError_cantidad(`*Solo hay ${stock} unidades disponibles*`);
+      return;
+    }
+
+    setError_cantidad("");
+
+    setCarrito((carritoActual) => {
+      const existe = carritoActual.some((item) => item.id === producto.id);
+
+      if (existe) {
+        return carritoActual.map((item) => {
+          if (item.id === producto.id && Number(item.unidades) + 1 <= stock) {
+            return { ...item, unidades: Number(item.unidades) + 1 };
+          }
+
+          return item;
+        });
+      }
+
+      return [...carritoActual, { ...producto, unidades: 1 }];
+    });
+  }
 
   async function cobrar(carrito) {
     const res = await fetch("/api/venta", {
@@ -60,6 +58,7 @@ export default function Home() {
       },
       body: JSON.stringify(carrito),
     });
+
     const data = await res.json();
 
     if (!res.ok) {
@@ -69,6 +68,7 @@ export default function Home() {
 
     await cargarProductos();
     await actualizarDatos();
+
     setCarrito([]);
     setError_cantidad("");
   }
@@ -79,12 +79,16 @@ export default function Home() {
         if (item.id !== productoId) {
           return [item];
         }
+
         setError_cantidad("");
+
         const unidades = item.unidades + cambio;
+
         if (productoCantidad < unidades) {
           setError_cantidad("*solo hay " + productoCantidad + " unidades*");
           return [item];
         }
+
         return unidades > 0 ? [{ ...item, unidades }] : [];
       }),
     );
@@ -94,6 +98,7 @@ export default function Home() {
     setCarrito((carritoActual) =>
       carritoActual.filter((item) => item.id !== productoId),
     );
+
     setError_cantidad("");
   }
 
@@ -103,6 +108,7 @@ export default function Home() {
         <Areacentral
           agregarProducto={agregarProducto}
         />
+
         <Cobrar
           carrito={carrito}
           cambiarCantidad={cambiarCantidad}
@@ -111,6 +117,8 @@ export default function Home() {
           error_cantidad={error_cantidad}
         />
       </div>
+
+      <span>{cajero}</span>
     </div>
   );
 }

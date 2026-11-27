@@ -13,6 +13,7 @@ export default function Navbar() {
     setTema(siguienteTema);
   }
 
+
   const etiquetaTema =
     tema === "light" ? "Cambiar a tema oscuro" : "Cambiar a tema claro";
 

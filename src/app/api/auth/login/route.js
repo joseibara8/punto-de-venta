@@ -34,6 +34,7 @@ export async function POST(request) {
 
     session.user = {
       id: usuario.id,
+      nombre:usuario.nombre,
     };
 
     await session.save();
