@@ -1,0 +1,137 @@
+.pagina {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: 32px 20px;
+  background: radial-gradient(circle at 50% 25%, var(--color-acento1), transparent 55%);
+}
+
+.tarjeta {
+  width: min(100%, 430px);
+  padding: 36px;
+  border: 1px solid var(--borde-barra-navegacion);
+  border-radius: 20px;
+  background: var(--fondo-barra-navegacion);
+  box-shadow: var(--sombra-elevada);
+}
+
+.icono {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 22px;
+  border-radius: 14px;
+  background: var(--color-acento1);
+  color: var(--color-acento);
+  font-size: 24px;
+}
+
+.etiqueta {
+  margin-bottom: 8px;
+  color: var(--color-acento);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.tarjeta h1 {
+  color: var(--color-texto-pagina);
+  font-size: clamp(26px, 5vw, 34px);
+}
+
+.descripcion {
+  margin-top: 8px;
+  color: var(--color-texto-secundario);
+  font-size: 14px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.formulario label {
+  margin-bottom: 8px;
+  color: var(--color-texto-pagina);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.formulario input {
+  width: 100%;
+  min-height: 46px;
+  margin-bottom: 20px;
+  padding: 0 14px;
+  border: 1px solid var(--borde-barra-navegacion);
+  border-radius: 10px;
+  background: var(--fondo-input);
+  color: var(--color-texto-pagina);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formulario input::placeholder {
+  color: var(--color-texto-secundario);
+}
+
+.formulario input:focus {
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px var(--color-acento1);
+}
+
+.formulario button {
+  min-height: 46px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--color-acento);
+  color: var(--fondo-barra-navegacion);
+  font-weight: 800;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.formulario button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.formulario button:focus-visible,
+.pie a:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+}
+
+.pie {
+  margin-top: 24px;
+  color: var(--color-texto-secundario);
+  text-align: center;
+  font-size: 14px;
+}
+
+.pie a {
+  color: var(--color-acento);
+  font-weight: 700;
+}
+
+.pie a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .tarjeta {
+    padding: 28px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formulario input,
+  .formulario button {
+    transition: none;
+  }
+
+  .formulario button:hover {
+    transform: none;
+  }
+}

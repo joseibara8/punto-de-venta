@@ -35,47 +35,48 @@ export default function VentaModal({ venta, onCerrar }) {
         aria-labelledby="titulo-venta"
         onMouseDown={(evento) => evento.stopPropagation()}
       >
-        <button
-          className={estilos.boton_cerrar}
-          type="button"
-          onClick={onCerrar}
-          aria-label="Cerrar detalle de venta"
-        >
-          <i className="fi fi-rr-cross" aria-hidden="true"></i>
-        </button>
-        <div className={estilos.contenedor_titulo}>
+        <div className={estilos.contenedor}>
+          <button
+            className={estilos.boton_cerrar}
+            type="button"
+            onClick={onCerrar}
+            aria-label="Cerrar detalle de venta"
+          >
+            <i className="fi fi-rr-cross" aria-hidden="true"></i>
+          </button>
+          <div className={estilos.contenedor_titulo}>
+            <i className="fi fi-rr-receipt" aria-hidden="true"></i>
+            <span id="titulo-venta">Venta #{venta.id}</span>
+          </div>
 
-        <i className="fi fi-rr-receipt" aria-hidden="true"></i>
-        <span id="titulo-venta">Venta #{venta.id}</span>
-        </div>
+          <div className={estilos.contenedor_subtitulo}>
+            <span>{formatearFecha(venta.fecha_venta)}</span>
+            <span>Cajero: {venta.cajero}</span>
+          </div>
 
-        <div className={estilos.contenedor_subtitulo}>
-          <span>{formatearFecha(venta.fecha_venta)}</span>
-          <span >Cajero: {venta.cajero}</span>
-        </div>
-
-        <div className={estilos.marcadores}>
-          <span>Productos</span>
-          <span>Cantidad</span>
-          <span>Precio</span>
-          <span>Importe</span>
-        </div>
-        <ul className={estilos.productos}>
-          {productos.map((producto, indice) => (
-            <div
-              key={producto.nombre + indice}
-              className={estilos.contenedor_productos}
-            >
-              <span>{producto.nombre}</span>
-              <span>{producto.unidades}</span>
-              <span>{producto.precio + "$"}</span>
-              <span>{producto.total_producto + "$"}</span>
-            </div>
-          ))}
-        </ul>
-        <div className={estilos.contenedor_total}>
-          <span>Total</span>
-          <span className={estilos.total}>${venta.total}</span>
+          <div className={estilos.marcadores}>
+            <span>Productos</span>
+            <span>Cantidad</span>
+            <span>Precio</span>
+            <span>Importe</span>
+          </div>
+          <ul className={estilos.productos}>
+            {productos.map((producto, indice) => (
+              <div
+                key={producto.nombre + indice}
+                className={estilos.contenedor_productos}
+              >
+                <span>{producto.nombre}</span>
+                <span>{producto.unidades}</span>
+                <span>{producto.precio + "$"}</span>
+                <span>{producto.total_producto + "$"}</span>
+              </div>
+            ))}
+          </ul>
+          <div className={estilos.contenedor_total}>
+            <span>Total</span>
+            <span className={estilos.total}>${venta.total}</span>
+          </div>
         </div>
       </div>
     </div>
