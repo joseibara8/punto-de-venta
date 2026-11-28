@@ -56,7 +56,8 @@ export default function Page() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(carrito),
+      body: JSON.stringify({ carrito, cajero }),
+
     });
 
     const data = await res.json();

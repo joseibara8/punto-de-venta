@@ -5,7 +5,7 @@ export async function POST(request) {
   let cliente;
 
   try {
-    const carrito = await request.json();
+    const {carrito,cajero} = await request.json();
 
     if (!Array.isArray(carrito) || carrito.length === 0) {
       return NextResponse.json(
@@ -18,7 +18,6 @@ export async function POST(request) {
     await cliente.query("BEGIN");
 
     const productos = [];
-    const cajero = "Ana lopez";
     let total = 0;
     let ganancias = 0;
 
